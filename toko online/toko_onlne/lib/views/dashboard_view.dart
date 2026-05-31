@@ -22,16 +22,16 @@ class _DashboardViewState extends State<DashboardView> {
   Timer? _timer;
 
   // ─── Monochrome Palette ───────────────────────────────────────
-  static const kBg      = Color(0xFF000000);
+  static const kBg = Color(0xFF000000);
   static const kSurface = Color(0xFF0F0F0F);
-  static const kCard    = Color(0xFF111111);
-  static const kCard2   = Color(0xFF161616);
-  static const kBorder  = Color(0xFF1A1A1A);
+  static const kCard = Color(0xFF111111);
+  static const kCard2 = Color(0xFF161616);
+  static const kBorder = Color(0xFF1A1A1A);
   static const kBorder2 = Color(0xFF262626);
-  static const kWhite   = Color(0xFFFFFFFF);
-  static const kGray1   = Color(0xFFAAAAAA);
-  static const kGray2   = Color(0xFF666666);
-  static const kGray3   = Color(0xFF333333);
+  static const kWhite = Color(0xFFFFFFFF);
+  static const kGray1 = Color(0xFFAAAAAA);
+  static const kGray2 = Color(0xFF666666);
+  static const kGray3 = Color(0xFF333333);
 
   final List<String> _carouselImages = [
     "https://picsum.photos/seed/cx1/800/400",
@@ -65,8 +65,8 @@ class _DashboardViewState extends State<DashboardView> {
     final user = await userLogin.getUserLogin();
     if (user != null && mounted) {
       setState(() {
-        nama      = user.nama_user;
-        role      = user.role;
+        nama = user.nama_user;
+        role = user.role;
         userEmail = user.email;
       });
     }
@@ -83,7 +83,10 @@ class _DashboardViewState extends State<DashboardView> {
         ),
         title: Text(
           "Keluar Aplikasi?",
-          style: GoogleFonts.poppins(color: kWhite, fontWeight: FontWeight.w700),
+          style: GoogleFonts.poppins(
+            color: kWhite,
+            fontWeight: FontWeight.w700,
+          ),
         ),
         content: Text(
           "Apakah kamu yakin ingin keluar dari sesi ini?",
@@ -92,15 +95,18 @@ class _DashboardViewState extends State<DashboardView> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text("Batal",
-              style: GoogleFonts.poppins(color: kGray2, fontSize: 13)),
+            child: Text(
+              "Batal",
+              style: GoogleFonts.poppins(color: kGray2, fontSize: 13),
+            ),
           ),
           TextButton(
             onPressed: () {
               Navigator.pop(context);
               Navigator.pushReplacementNamed(context, '/login');
             },
-            child: Text("Keluar",
+            child: Text(
+              "Keluar",
               style: GoogleFonts.poppins(
                 color: kWhite,
                 fontWeight: FontWeight.w700,
@@ -157,7 +163,10 @@ class _DashboardViewState extends State<DashboardView> {
               ),
               const SizedBox(height: 4),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   border: Border.all(color: kBorder2),
                   borderRadius: BorderRadius.circular(4),
@@ -177,7 +186,11 @@ class _DashboardViewState extends State<DashboardView> {
               const SizedBox(height: 16),
               Row(
                 children: [
-                  const Icon(Icons.alternate_email_rounded, size: 16, color: kGray2),
+                  const Icon(
+                    Icons.alternate_email_rounded,
+                    size: 16,
+                    color: kGray2,
+                  ),
                   const SizedBox(width: 10),
                   Expanded(
                     child: Text(
@@ -200,7 +213,8 @@ class _DashboardViewState extends State<DashboardView> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text("Tutup",
+                  child: Text(
+                    "Tutup",
                     style: GoogleFonts.poppins(
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
@@ -221,7 +235,7 @@ class _DashboardViewState extends State<DashboardView> {
       backgroundColor: kBg,
       extendBodyBehindAppBar: true,
       appBar: _buildAppBar(),
-      body: role == "admin" ? _buildAdminView() : _buildKasirView(),
+      body: role == "admin" ? _buildKasirView() : _buildAdminView(),
       bottomNavigationBar: const BottomNav(0),
     );
   }
@@ -243,7 +257,7 @@ class _DashboardViewState extends State<DashboardView> {
           ),
           const SizedBox(width: 10),
           Text(
-            "CINEMAX",
+            "TOKO ONLINE",
             style: GoogleFonts.poppins(
               fontSize: 16,
               color: kWhite,
@@ -340,10 +354,10 @@ class _DashboardViewState extends State<DashboardView> {
             mainAxisSpacing: 12,
             childAspectRatio: 1.5,
             children: [
-              _buildStatCard("Pendapatan",   "Rp 45.2 Jt", "+12%"),
-              _buildStatCard("Total User",   "8,540",      "+5.4%"),
-              _buildStatCard("Film Aktif",   "1,250",      "+2"),
-              _buildStatCard("Pengaduan",    "12",         "-2"),
+              _buildStatCard("Pendapatan", "Rp 45.2 Jt", "+12%"),
+              _buildStatCard("Total User", "8,540", "+5.4%"),
+              _buildStatCard("Produk Aktif", "1,250", "+2"),
+              _buildStatCard("Pengaduan", "12", "-2"),
             ],
           ),
 
@@ -360,9 +374,9 @@ class _DashboardViewState extends State<DashboardView> {
             ),
           ),
           const SizedBox(height: 14),
-          _buildActivity("Baru saja",   "User Budi mendaftar Premium"),
-          _buildActivity("5 menit lalu","Admin menghapus film 'Spiderman 3'"),
-          _buildActivity("1 jam lalu",  "Server maintenance selesai"),
+          _buildActivity("Baru saja", "User Budi mendaftar Premium"),
+          _buildActivity("5 menit lalu", "Admin menghapus produk 'Sepatu X'"),
+          _buildActivity("1 jam lalu", "Server maintenance selesai"),
         ],
       ),
     );
@@ -399,10 +413,7 @@ class _DashboardViewState extends State<DashboardView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            title,
-            style: GoogleFonts.poppins(fontSize: 11, color: kGray2),
-          ),
+          Text(title, style: GoogleFonts.poppins(fontSize: 11, color: kGray2)),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -541,7 +552,7 @@ class _DashboardViewState extends State<DashboardView> {
           Padding(
             padding: const EdgeInsets.only(left: 20),
             child: Text(
-              "GENRE",
+              "KATEGORI",
               style: GoogleFonts.poppins(
                 fontSize: 10,
                 color: kGray2,
@@ -558,7 +569,14 @@ class _DashboardViewState extends State<DashboardView> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               itemCount: 6,
               itemBuilder: (_, i) {
-                final cats = ["Semua", "Aksi", "Horor", "Sci-Fi", "Romance", "Animasi"];
+                final cats = [
+                  "Semua",
+                  "Elektronik",
+                  "Pakaian",
+                  "Makanan",
+                  "Olahraga",
+                  "Lainnya",
+                ];
                 final active = i == 0;
                 return Container(
                   margin: const EdgeInsets.only(right: 8),
@@ -592,7 +610,7 @@ class _DashboardViewState extends State<DashboardView> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "SEDANG TAYANG",
+                  "PRODUK BARU",
                   style: GoogleFonts.poppins(
                     fontSize: 10,
                     color: kGray2,
@@ -669,8 +687,7 @@ class _DashboardViewState extends State<DashboardView> {
           Image.network(
             _carouselImages[i],
             fit: BoxFit.cover,
-            errorBuilder: (_, __, ___) =>
-                Container(color: kCard),
+            errorBuilder: (_, __, ___) => Container(color: kCard),
           ),
           Container(
             decoration: const BoxDecoration(
@@ -685,7 +702,7 @@ class _DashboardViewState extends State<DashboardView> {
             left: 16,
             bottom: 16,
             child: Text(
-              "Sedang Tren di CinemaX",
+              "Rekomendasi Terbaik",
               style: GoogleFonts.poppins(
                 color: kWhite,
                 fontSize: 16,
@@ -718,17 +735,14 @@ class _DashboardViewState extends State<DashboardView> {
           ),
           const SizedBox(height: 7),
           Text(
-            "Film ${i + 1}",
+            "Produk ${i + 1}",
             style: GoogleFonts.poppins(
               fontSize: 12,
               color: kWhite,
               fontWeight: FontWeight.w700,
             ),
           ),
-          Text(
-            "Aksi",
-            style: GoogleFonts.poppins(fontSize: 10, color: kGray2),
-          ),
+          Text("Toko Online", style: GoogleFonts.poppins(fontSize: 10, color: kGray2)),
         ],
       ),
     );
@@ -746,7 +760,9 @@ class _DashboardViewState extends State<DashboardView> {
         children: [
           Expanded(
             child: ClipRRect(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(7)),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(7),
+              ),
               child: Image.network(
                 "https://picsum.photos/seed/reco$i/300/400",
                 fit: BoxFit.cover,
@@ -761,7 +777,7 @@ class _DashboardViewState extends State<DashboardView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Film ${i + 1}",
+                  "Produk ${i + 1}",
                   style: GoogleFonts.poppins(
                     color: kWhite,
                     fontSize: 12,
@@ -771,7 +787,7 @@ class _DashboardViewState extends State<DashboardView> {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  "Genre",
+                  "Kategori",
                   style: GoogleFonts.poppins(color: kGray2, fontSize: 10),
                 ),
               ],
@@ -782,3 +798,4 @@ class _DashboardViewState extends State<DashboardView> {
     );
   }
 }
+

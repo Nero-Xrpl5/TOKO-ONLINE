@@ -14,11 +14,11 @@ class _BottomNavState extends State<BottomNav> {
   UserLogin userLogin = UserLogin();
   String? role;
 
-  static const kBg      = Color(0xFF000000);
+  static const kBg = Color(0xFF000000);
   static const kSurface = Color(0xFF0D0D0D);
-  static const kBorder  = Color(0xFF1A1A1A);
-  static const kWhite   = Color(0xFFFFFFFF);
-  static const kGray    = Color(0xFF555555);
+  static const kBorder = Color(0xFF1A1A1A);
+  static const kWhite = Color(0xFFFFFFFF);
+  static const kGray = Color(0xFF555555);
 
   @override
   void initState() {
@@ -36,7 +36,7 @@ class _BottomNavState extends State<BottomNav> {
   void _navigate(int index) {
     if (role == "admin") {
       if (index == 0) Navigator.pushReplacementNamed(context, '/dashboard');
-      if (index == 1) Navigator.pushReplacementNamed(context, '/movie');
+      if (index == 1) Navigator.pushReplacementNamed(context, '/product');
     } else {
       if (index == 0) Navigator.pushReplacementNamed(context, '/dashboard');
       if (index == 1) Navigator.pushReplacementNamed(context, '/pesan');
@@ -61,12 +61,12 @@ class _BottomNavState extends State<BottomNav> {
           ),
           _buildItem(
             icon: role == "admin"
-                ? Icons.movie_outlined
-                : Icons.receipt_long_outlined,
+                ? Icons.inventory_2_outlined
+                : Icons.shopping_bag_outlined,
             activeIcon: role == "admin"
-                ? Icons.movie_rounded
-                : Icons.receipt_long_rounded,
-            label: role == "admin" ? "Film" : "Pesanan",
+                ? Icons.inventory_2_rounded
+                : Icons.shopping_bag_rounded,
+            label: role == "admin" ? "Produk" : "Katalog",
             index: 1,
           ),
         ],

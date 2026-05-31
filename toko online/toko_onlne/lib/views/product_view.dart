@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:toko_online/models/product_model.dart';
 import 'package:toko_online/services/product_service.dart';
+import 'package:toko_online/views/product_form_view.dart';
 import 'package:toko_online/widgets/bottom_nav.dart';
 
 class ProductView extends StatefulWidget {
@@ -19,14 +20,14 @@ class _ProductViewState extends State<ProductView> {
   String _errorMessage = '';
 
   // ─── Monochrome Palette ───────────────────────────────────────
-  static const kBg       = Color(0xFF000000);
-  static const kSurface  = Color(0xFF0F0F0F);
-  static const kCard     = Color(0xFF141414);
-  static const kBorder   = Color(0xFF1E1E1E);
-  static const kBorder2  = Color(0xFF2A2A2A);
-  static const kWhite    = Color(0xFFFFFFFF);
-  static const kGray1    = Color(0xFFAAAAAA);
-  static const kGray2    = Color(0xFF666666);
+  static const kBg      = Color(0xFF000000);
+  static const kSurface = Color(0xFF0F0F0F);
+  static const kCard    = Color(0xFF141414);
+  static const kBorder  = Color(0xFF1E1E1E);
+  static const kBorder2 = Color(0xFF2A2A2A);
+  static const kWhite   = Color(0xFFFFFFFF);
+  static const kGray1   = Color(0xFFAAAAAA);
+  static const kGray2   = Color(0xFF666666);
 
   @override
   void initState() {
@@ -41,6 +42,11 @@ class _ProductViewState extends State<ProductView> {
     });
     final result = await _productService.getProducts();
     if (!mounted) return;
+    if (result.isUnauthorized) {
+      // Token habis → paksa logout ke halaman login
+      Navigator.pushNamedAndRemoveUntil(context, '/login', (_) => false);
+      return;
+    }
     if (result.status) {
       setState(() {
         _products = List<ProductModel>.from(result.data ?? []);
@@ -51,6 +57,17 @@ class _ProductViewState extends State<ProductView> {
         _errorMessage = result.message;
       });
     }
+  }
+
+  /// Navigasi ke form dan refresh jika ada perubahan
+  Future<void> _goToForm({ProductModel? item}) async {
+    final shouldRefresh = await Navigator.push<bool>(
+      context,
+      MaterialPageRoute(
+        builder: (_) => ProductFormView(item: item),
+      ),
+    );
+    if (shouldRefresh == true) _fetchProducts();
   }
 
   String _formatRupiah(int amount) {
@@ -68,6 +85,15 @@ class _ProductViewState extends State<ProductView> {
       appBar: _buildAppBar(),
       body: _buildBody(),
       bottomNavigationBar: const BottomNav(1),
+      // FAB tombol tambah produk baru
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _goToForm(),
+        backgroundColor: kWhite,
+        foregroundColor: kBg,
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+        child: const Icon(Icons.add_rounded, size: 26),
+      ),
     );
   }
 
@@ -115,15 +141,9 @@ class _ProductViewState extends State<ProductView> {
   }
 
   Widget _buildBody() {
-    if (_hasError) {
-      return _buildErrorState();
-    }
-    if (_products == null) {
-      return _buildLoadingState();
-    }
-    if (_products!.isEmpty) {
-      return _buildEmptyState();
-    }
+    if (_hasError) return _buildErrorState();
+    if (_products == null) return _buildLoadingState();
+    if (_products!.isEmpty) return _buildEmptyState();
     return _buildProductList();
   }
 
@@ -145,11 +165,7 @@ class _ProductViewState extends State<ProductView> {
           const SizedBox(height: 20),
           Text(
             "Memuat produk...",
-            style: GoogleFonts.poppins(
-              fontSize: 13,
-              color: kGray2,
-              letterSpacing: 0.5,
-            ),
+            style: GoogleFonts.poppins(fontSize: 13, color: kGray2),
           ),
         ],
       ),
@@ -177,10 +193,7 @@ class _ProductViewState extends State<ProductView> {
             Text(
               "Gagal Memuat",
               style: GoogleFonts.poppins(
-                fontSize: 18,
-                color: kWhite,
-                fontWeight: FontWeight.w700,
-              ),
+                  fontSize: 18, color: kWhite, fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 8),
             Text(
@@ -196,13 +209,11 @@ class _ProductViewState extends State<ProductView> {
                 foregroundColor: kWhite,
                 padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
+                    borderRadius: BorderRadius.circular(8)),
               ),
-              child: Text(
-                "Coba Lagi",
-                style: GoogleFonts.poppins(fontSize: 13, fontWeight: FontWeight.w600),
-              ),
+              child: Text("Coba Lagi",
+                  style: GoogleFonts.poppins(
+                      fontSize: 13, fontWeight: FontWeight.w600)),
             ),
           ],
         ),
@@ -226,15 +237,12 @@ class _ProductViewState extends State<ProductView> {
             child: const Icon(Icons.inventory_2_outlined, color: kGray2, size: 28),
           ),
           const SizedBox(height: 20),
-          Text(
-            "Belum ada produk",
-            style: GoogleFonts.poppins(fontSize: 16, color: kGray1, fontWeight: FontWeight.w600),
-          ),
+          Text("Belum ada produk",
+              style: GoogleFonts.poppins(
+                  fontSize: 16, color: kGray1, fontWeight: FontWeight.w600)),
           const SizedBox(height: 6),
-          Text(
-            "Tambahkan produk baru melalui panel admin",
-            style: GoogleFonts.poppins(fontSize: 12, color: kGray2),
-          ),
+          Text("Tekan + untuk menambahkan produk baru",
+              style: GoogleFonts.poppins(fontSize: 12, color: kGray2)),
         ],
       ),
     );
@@ -248,25 +256,26 @@ class _ProductViewState extends State<ProductView> {
       backgroundColor: kCard,
       child: ListView.separated(
         physics: const AlwaysScrollableScrollPhysics(
-          parent: BouncingScrollPhysics(),
-        ),
-        padding: const EdgeInsets.only(bottom: 20),
+            parent: BouncingScrollPhysics()),
+        padding: const EdgeInsets.only(bottom: 90), // ruang untuk FAB
         itemCount: _products!.length,
         separatorBuilder: (_, __) => Container(height: 1, color: kBorder),
-        itemBuilder: (context, index) => _buildProductCard(_products![index], index),
+        itemBuilder: (context, index) =>
+            _buildProductCard(_products![index]),
       ),
     );
   }
 
-  Widget _buildProductCard(ProductModel product, int index) {
+  Widget _buildProductCard(ProductModel product) {
     final imageUrl = product.image.isNotEmpty
         ? product.image
         : "https://picsum.photos/seed/prod${product.id}/200/200";
-    final isLowStock = product.stok <= 5;
+    final isLowStock  = product.stok > 0 && product.stok <= 5;
     final isOutOfStock = product.stok == 0;
 
     return InkWell(
-      onTap: () => _showProductDetail(product),
+      // Ketuk → buka form Edit
+      onTap: () => _goToForm(item: product),
       splashColor: kBorder,
       highlightColor: kSurface,
       child: Container(
@@ -303,7 +312,6 @@ class _ProductViewState extends State<ProductView> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Name
                   Text(
                     product.namaBarang,
                     style: GoogleFonts.poppins(
@@ -315,8 +323,6 @@ class _ProductViewState extends State<ProductView> {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 3),
-
-                  // Description
                   Text(
                     product.deskripsi,
                     style: GoogleFonts.poppins(fontSize: 11, color: kGray2),
@@ -324,10 +330,8 @@ class _ProductViewState extends State<ProductView> {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 10),
-
                   Row(
                     children: [
-                      // Price
                       Text(
                         _formatRupiah(product.harga),
                         style: GoogleFonts.poppins(
@@ -338,14 +342,16 @@ class _ProductViewState extends State<ProductView> {
                         ),
                       ),
                       const Spacer(),
-
-                      // Stock Badge
                       _buildStockBadge(product.stok, isLowStock, isOutOfStock),
                     ],
                   ),
                 ],
               ),
             ),
+
+            // ── Edit arrow ──
+            const SizedBox(width: 10),
+            const Icon(Icons.chevron_right_rounded, color: kGray2, size: 20),
           ],
         ),
       ),
@@ -359,16 +365,16 @@ class _ProductViewState extends State<ProductView> {
 
     if (isOut) {
       borderColor = kGray2;
-      textColor = kGray2;
-      label = "Habis";
+      textColor   = kGray2;
+      label       = "Habis";
     } else if (isLow) {
       borderColor = kGray1;
-      textColor = kGray1;
-      label = "$stok tersisa";
+      textColor   = kGray1;
+      label       = "$stok tersisa";
     } else {
       borderColor = kBorder2;
-      textColor = kGray1;
-      label = "Stok $stok";
+      textColor   = kGray1;
+      label       = "Stok $stok";
     }
 
     return Container(
@@ -384,105 +390,6 @@ class _ProductViewState extends State<ProductView> {
           color: textColor,
           fontWeight: FontWeight.w600,
           letterSpacing: 0.3,
-        ),
-      ),
-    );
-  }
-
-  // ─── Product Detail Bottom Sheet ──────────────────────────────
-  void _showProductDetail(ProductModel product) {
-    final imageUrl = product.image.isNotEmpty
-        ? product.image
-        : "https://picsum.photos/seed/prod${product.id}/400/400";
-
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: kCard,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-      ),
-      builder: (_) => Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Container(
-                width: 36,
-                height: 3,
-                decoration: BoxDecoration(
-                  color: kBorder2,
-                  borderRadius: BorderRadius.circular(2),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Row(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.network(
-                    imageUrl,
-                    width: 90,
-                    height: 90,
-                    fit: BoxFit.cover,
-                    errorBuilder: (_, __, ___) =>
-                        Container(width: 90, height: 90, color: kBorder),
-                  ),
-                ),
-                const SizedBox(width: 20),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        product.namaBarang,
-                        style: GoogleFonts.poppins(
-                          fontSize: 16,
-                          color: kWhite,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      const SizedBox(height: 6),
-                      Text(
-                        _formatRupiah(product.harga),
-                        style: GoogleFonts.poppins(
-                          fontSize: 18,
-                          color: kWhite,
-                          fontWeight: FontWeight.w900,
-                          letterSpacing: -0.5,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        "${product.stok} unit tersedia",
-                        style: GoogleFonts.poppins(fontSize: 12, color: kGray2),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            Container(height: 1, color: kBorder),
-            const SizedBox(height: 16),
-            Text(
-              "Deskripsi",
-              style: GoogleFonts.poppins(
-                fontSize: 11,
-                color: kGray2,
-                fontWeight: FontWeight.w600,
-                letterSpacing: 2,
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              product.deskripsi.isNotEmpty ? product.deskripsi : "Tidak ada deskripsi.",
-              style: GoogleFonts.poppins(fontSize: 13, color: kGray1, height: 1.6),
-            ),
-            const SizedBox(height: 24),
-          ],
         ),
       ),
     );

@@ -17,12 +17,19 @@ class ProductModel {
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
     return ProductModel(
-      id: int.tryParse(json['id'].toString()) ?? 0,
+      id: int.tryParse((json['id'] ?? json['id_barang'] ?? 0).toString()) ?? 0,
       namaBarang: json['nama_barang'] ?? '',
       deskripsi: json['deskripsi'] ?? '',
       harga: int.tryParse(json['harga'].toString()) ?? 0,
       stok: int.tryParse(json['stok'].toString()) ?? 0,
-      image: json['image'] ?? '',
+      image: _formatImage(json['image'] ?? ''),
     );
   }
+
+  static String _formatImage(String image) {
+    if (image.isEmpty) return '';
+    if (image.startsWith('http')) return image;
+    return 'https://learn.smktelkom-mlg.sch.id/toko/public/images/$image';
+  }
+
 }
