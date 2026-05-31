@@ -1,0 +1,34 @@
+name: toko_online
+description: Aplikasi Movie dengan fitur autentikasi (login & register).
+publish_to: 'none' # Hapus jika ingin publish ke pub.dev
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_fonts: ^6.1.0
+  cupertino_icons: ^1.0.6
+  http: ^1.6.0
+  shared_preferences: ^2.2.3
+  intl: ^0.20.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  # Opsional: Jika nanti pakai gambar lokal
+  # assets:
+  #   - assets/images/
+
+  # Opsional: Jika butuh font kustom
+  # fonts:
+  #   - family: CustomFont
+  #     fonts:
+  #       - asset: fonts/CustomFont-Regular.ttf

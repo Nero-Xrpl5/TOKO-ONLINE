@@ -1,0 +1,325 @@
+{
+  "info": {
+    "_postman_id": "c42d2f20-de27-4540-8695-645e1b091057",
+    "name": "IntDex",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "51305229",
+    "_collection_link": "https://go.postman.co/collection/51305229-c42d2f20-de27-4540-8695-645e1b091057?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Get User",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2JlX3Rva29vbmxpbmUvcHVibGljL2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNzQyMjcwMzI3LCJleHAiOjE3NDIyNzc1MjcsIm5iZiI6MTc0MjI3MDMyNywianRpIjoibDY1Q3JYdFkyYVVtblBKZiIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.ugw7sgOrKg0mwV3fu4B_AlL6IRxxhhhDPEn64yYGxlA",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{Online}}/admin/getuser",
+              "host": [
+                "{{Online}}"
+              ],
+              "path": [
+                "admin",
+                "getuser"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Barang",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGVhcm4uc21rdGVsa29tLW1sZy5zY2guaWQvdG9rby9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTc0MjM0MzUzMiwiZXhwIjoxNzQyMzUwNzMyLCJuYmYiOjE3NDIzNDM1MzIsImp0aSI6IklVRVdKbnd6QkxSOFV6R0QiLCJzdWIiOiIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.SBOyYCdebRNS23jsJsxC3GwVIeJqFA8r4-JqNzB_L_Q",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{Online}}/admin/getbarang",
+              "host": [
+                "{{Online}}"
+              ],
+              "path": [
+                "admin",
+                "getbarang"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Insert Barang",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGVhcm4uc21rdGVsa29tLW1sZy5zY2guaWQvdG9rby9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTc0MjM0MzUzMiwiZXhwIjoxNzQyMzUwNzMyLCJuYmYiOjE3NDIzNDM1MzIsImp0aSI6IklVRVdKbnd6QkxSOFV6R0QiLCJzdWIiOiIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.SBOyYCdebRNS23jsJsxC3GwVIeJqFA8r4-JqNzB_L_Q",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "nama_barang",
+                  "value": "supermie",
+                  "type": "text",
+                  "uuid": "67e28aa0-ead9-423b-bdbb-3300d75ebb41"
+                },
+                {
+                  "key": "deskripsi",
+                  "value": "makanan enak",
+                  "type": "text",
+                  "uuid": "34ee9473-edae-4f67-b00c-4910ad102222"
+                },
+                {
+                  "key": "stok",
+                  "value": "2",
+                  "type": "text",
+                  "uuid": "4d15a2d2-5f51-490b-8174-c51b8cc12cfb"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "uuid": "4fb62594-96ed-48f5-8209-3991ed729e16",
+                  "src": "/C:/Users/tbosu/Downloads/aula 2.jpg"
+                },
+                {
+                  "key": "harga",
+                  "value": "5000",
+                  "type": "text",
+                  "uuid": "a96e9f5f-45b4-4c81-bca7-a17e965f6040"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{Online}}/admin/insertbarang",
+              "host": [
+                "{{Online}}"
+              ],
+              "path": [
+                "admin",
+                "insertbarang"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Barang",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2JlX3Rva29vbmxpbmUvcHVibGljL2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNzQyMjcxMTIyLCJleHAiOjE3NDIyNzgzMjIsIm5iZiI6MTc0MjI3MTEyMiwianRpIjoiTFZkYlh4bWdOcVNYdzhGVSIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.GVYYQl93ip_j-R9h2bi-xnouI8lr5FVuy__29F7WUvg",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "nama_barang",
+                  "value": "bak mie",
+                  "type": "text"
+                },
+                {
+                  "key": "deskripsi",
+                  "value": "enak enan",
+                  "type": "text"
+                },
+                {
+                  "key": "harga",
+                  "value": "10000",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": "/C:/Users/tbosu/Downloads/aula 1.jpg"
+                },
+                {
+                  "key": "stok",
+                  "value": "4",
+                  "type": "text",
+                  "uuid": "06964e59-c5ee-44b9-9161-b065b0508b82"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{Online}}/admin/updatebarang/1",
+              "host": [
+                "{{Online}}"
+              ],
+              "path": [
+                "admin",
+                "updatebarang",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Hapus Barang",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGVhcm4uc21rdGVsa29tLW1sZy5zY2guaWQvdG9rby9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTc0MjM0MzQyOCwiZXhwIjoxNzQyMzUwNjI4LCJuYmYiOjE3NDIzNDM0MjgsImp0aSI6ImNzb1VmR3hoOVloblNLblMiLCJzdWIiOiIyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.oBKXGgEFri8Ez23XqoADyAB-SBB622y-jnl9W1t8R9k",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{Online}}/admin/hapusbarang/100",
+              "host": [
+                "{{Online}}"
+              ],
+              "path": [
+                "admin",
+                "hapusbarang",
+                "100"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "transaksi",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2JlX3Rva29vbmxpbmUvcHVibGljL2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNzQyMjcxNjE5LCJleHAiOjE3NDIyNzg4MTksIm5iZiI6MTc0MjI3MTYxOSwianRpIjoiSTRJS1lkNlFyMkdIWWswdSIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.W0f-BCcgiVaFV5P4wFCm3hrpCL40HcoKRt80F9HbgaI",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"pesan\":[\r\n        {\r\n        \"barang_id\":1,\r\n        \"qty\":2\r\n        },\r\n        {\r\n        \"barang_id\":1,\r\n        \"qty\":1\r\n        }       \r\n    ]\r\n}"
+            },
+            "url": {
+              "raw": "{{Online}}/user/transaksi",
+              "host": [
+                "{{Online}"
+              ],
+              "path": [
+                "user",
+                "transaksi"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "history transaksi",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGVhcm4uc21rdGVsa29tLW1sZy5zY2guaWQvdG9rby9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTc0MjM0MzQyOCwiZXhwIjoxNzQyMzUwNjI4LCJuYmYiOjE3NDIzNDM0MjgsImp0aSI6ImNzb1VmR3hoOVloblNLblMiLCJzdWIiOiIyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.oBKXGgEFri8Ez23XqoADyAB-SBB622y-jnl9W1t8R9k",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"pesan\":[\r\n        {\r\n        \"movie_id\":40,\r\n        \"qty\":2\r\n        },\r\n        {\r\n        \"movie_id\":47,\r\n        \"qty\":1\r\n        }       \r\n    ]\r\n}"
+            },
+            "url": {
+              "raw": "{{Online}}/user/history_trans",
+              "host": [
+                "{{Online}}"
+              ],
+              "path": [
+                "user",
+                "history_trans"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Barang",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbGVhcm4uc21rdGVsa29tLW1sZy5zY2guaWQvdG9rby9hcGkvYXV0aC9sb2dpbiIsImlhdCI6MTc0MjM0MzQyOCwiZXhwIjoxNzQyMzUwNjI4LCJuYmYiOjE3NDIzNDM0MjgsImp0aSI6ImNzb1VmR3hoOVloblNLblMiLCJzdWIiOiIyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.oBKXGgEFri8Ez23XqoADyAB-SBB622y-jnl9W1t8R9k",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{Online}}/user/getbarang",
+              "host": [
+                "{{Online}}"
+              ],
+              "path": [
+                "user",
+                "getbarang"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
+
