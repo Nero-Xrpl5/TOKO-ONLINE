@@ -72,7 +72,7 @@ class _PesanViewState extends State<PesanView> {
         separatorBuilder: (_, __) => Container(height: 1, color: kBorder),
         itemBuilder: (_, i) => _buildOrderItem(i),
       ),
-      bottomNavigationBar: BottomNav(1),
+      bottomNavigationBar: const BottomNav(1),
     );
   }
 
@@ -107,7 +107,7 @@ class _PesanViewState extends State<PesanView> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(6),
                 child: Image.network(
-                  "https://picsum.photos/seed/order${i}/80/80",
+                  "https://picsum.photos/seed/order$i/80/80",
                   width: 56,
                   height: 56,
                   fit: BoxFit.cover,

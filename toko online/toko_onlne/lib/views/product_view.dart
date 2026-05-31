@@ -67,7 +67,7 @@ class _ProductViewState extends State<ProductView> {
       backgroundColor: kBg,
       appBar: _buildAppBar(),
       body: _buildBody(),
-      bottomNavigationBar: BottomNav(1),
+      bottomNavigationBar: const BottomNav(1),
     );
   }
 
@@ -133,7 +133,7 @@ class _ProductViewState extends State<ProductView> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(
+          const SizedBox(
             width: 28,
             height: 28,
             child: CircularProgressIndicator(

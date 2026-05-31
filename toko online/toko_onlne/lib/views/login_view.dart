@@ -60,7 +60,8 @@ class _LoginViewState extends State<LoginView> {
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: SizedBox(
-            height: MediaQuery.of(context).size.height -
+            height:
+                MediaQuery.of(context).size.height -
                 MediaQuery.of(context).padding.top -
                 MediaQuery.of(context).padding.bottom,
             child: Padding(
@@ -113,7 +114,7 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    "Kelola film dan pesanan dengan mudah",
+                    "Kelola produk dan pesanan dengan mudah",
                     style: GoogleFonts.poppins(fontSize: 13, color: kGray1),
                   ),
 
@@ -193,8 +194,10 @@ class _LoginViewState extends State<LoginView> {
                       onTap: () => Navigator.pushNamed(context, '/register'),
                       child: RichText(
                         text: TextSpan(
-                          style:
-                              GoogleFonts.poppins(fontSize: 13, color: kGray1),
+                          style: GoogleFonts.poppins(
+                            fontSize: 13,
+                            color: kGray1,
+                          ),
                           children: [
                             const TextSpan(text: "Belum punya akun? "),
                             TextSpan(

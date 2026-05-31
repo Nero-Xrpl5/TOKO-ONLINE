@@ -222,7 +222,7 @@ class _DashboardViewState extends State<DashboardView> {
       extendBodyBehindAppBar: true,
       appBar: _buildAppBar(),
       body: role == "admin" ? _buildAdminView() : _buildKasirView(),
-      bottomNavigationBar: BottomNav(0),
+      bottomNavigationBar: const BottomNav(0),
     );
   }
 
@@ -476,7 +476,7 @@ class _DashboardViewState extends State<DashboardView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: kToolbarHeight + 30),
+          const SizedBox(height: kToolbarHeight + 30),
 
           // Greeting
           Padding(

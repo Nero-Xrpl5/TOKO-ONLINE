@@ -89,7 +89,7 @@ class _MovieViewState extends State<MovieView> {
         separatorBuilder: (_, __) => Container(height: 1, color: kBorder),
         itemBuilder: (_, i) => _buildMovieItem(i),
       ),
-      bottomNavigationBar: BottomNav(1),
+      bottomNavigationBar: const BottomNav(1),
     );
   }
 
